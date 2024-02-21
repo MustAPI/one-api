@@ -19,7 +19,7 @@ export resourceGroup="openai"
 
 function ding {
     msg="$1"
-    echo "[$(date)]Error: $msg"
+    echo "Error: $msg"
 }
 
 function ip_ping() {
@@ -57,7 +57,7 @@ function close_content_filter() {
 
   #local az_domain="https://httpbin.org/anything"
   local az_domain="https://management.azure.com"
-  echo "[$(date)]Close content filter for ${accountName} of ${modelName}-${version}-${capacity}..."
+  echo "Close content filter for ${accountName} of ${modelName}-${version}-${capacity}..."
   curl -s -X PUT "${az_domain}/subscriptions/${subscriptionId}/resourceGroups/${resourceGroup}/providers/Microsoft.CognitiveServices/accounts/${accountName}/deployments/${deploymentName}?api-version=2023-10-01-preview" \
     -H "Content-Type: application/json" \
     -H "Authorization: Bearer $accessToken" \
@@ -99,7 +99,7 @@ function az_create_account() {
     --yes
 
   if [ $? -ne 0 ]; then
-    ding "Create account ${openai_name} execution failed"
+    ding "create ${openai_name} execution failed"
   fi
 }
 
@@ -110,7 +110,7 @@ function az_deployment() {
   local capacity=$4
   local deploymentName=$5
 
-  echo "[$(date)]Deployment ${deploymentName} for ${accountName} of ${modelName}-${version}-${capacity}..."
+  echo "Deployment ${deploymentName} for ${accountName} of ${modelName}-${version}-${capacity}..."
   az cognitiveservices account deployment create \
     --name "${accountName}" \
     --resource-group "${resourceGroup}" \
@@ -122,7 +122,7 @@ function az_deployment() {
     --sku-name "Standard"
 
   if [ $? -ne 0 ]; then
-    ding "Deployment ${accountName}-${modelName}-${version}-${capacity}-${deploymentName} execution failed"
+    ding "deployment ${accountName} execution failed"
   fi
 }
 
@@ -145,10 +145,8 @@ function az_export_accounts() {
   local sub=$1
   local subnum=$2
 
-  local results_file="./data/openai_accounts_${subnum}.csv"
-  local results_v2_file="./data/openai_accounts_v2_${subnum}.csv"
+  local results_file="openai_accounts_${subnum}.csv"
   touch "$results_file"
-  touch "$results_v2_file"
 
   echo "Subscription ID: ${sub}"
   az account set --subscription "${sub}"
@@ -169,16 +167,6 @@ function az_export_accounts() {
 
     # append to csv
     echo "$sub,$account_name,$api_key1,$api_key2,$endpoint,$location" >> "$results_file"
-    # v2
-    deployments=$(az cognitiveservices account deployment list --name "${account_name}" --resource-group ${resourceGroup} -o json)
-    for deployment in $(echo "$deployments" | jq -r '.[] | @base64'); do
-      deploymentName=$(echo "$deployment" | base64 --decode | jq -r '.name')
-      modelName=$(echo "$deployment" | base64 --decode | jq -r '.properties.model.name')
-      modelVersion=$(echo "$deployment" | base64 --decode | jq -r '.properties.model.version')
-      capacity=$(echo "$deployment" | base64 --decode | jq -r '.sku.capacity')
-
-      echo "${api_key1},${deploymentName},${modelName},${modelVersion},${capacity},${endpoint}openai/deployments/$deploymentName/chat/completions?api-version=2023-07-01-preview,${location}" >> "$results_v2_file"
-    done
   done
 }
 
@@ -214,52 +202,79 @@ function az_export_accounts_v2() {
     done
 }
 
-function az_region_deployment() {
-  local region=$1
-  local subnum=$2
-  local config=$3
-  echo "[$(date)]Processing region: ${region}-${subnum}..."
-  local models=($(echo "$config" | jq -r ".$region[] | @base64"))
-  for model in "${models[@]}"; do
-    model_json=$(echo "$model" | base64 -d)
-    modelName=$(echo "$model_json" | jq -r '.modelName')
-    version=$(echo "$model_json" | jq -r '.version')
-    capacity=$(echo "$model_json" | jq -r '.capacity')
-    deployName=$(echo "$model_json" | jq -r '.deployName')
-    # deployment
-    az_deployment_flow "${region}" "${subnum}" "${modelName}" "${version}" "${capacity}" "${deployName}"
-  done
-}
-
 ### end core functions
 
 default_config_json=$(cat <<EOF
 {
   "AustraliaEast": [
     {"deployName": "gpt-35-turbo", "modelName": "gpt-35-turbo", "version": "0613", "capacity": 240},
+    {"deployName": "gpt-35-turbo-16k", "modelName": "gpt-35-turbo-16k", "version": "0613", "capacity": 240},
     {"deployName": "gpt-4", "modelName": "gpt-4", "version": "0613", "capacity": 40},
     {"deployName": "gpt-4-32k", "modelName": "gpt-4-32k", "version": "0613", "capacity": 80}
   ],
   "CanadaEast": [
     {"deployName": "gpt-35-turbo", "modelName": "gpt-35-turbo", "version": "0613", "capacity": 240},
+    {"deployName": "gpt-35-turbo-16k", "modelName": "gpt-35-turbo-16k", "version": "0613", "capacity": 240},
     {"deployName": "gpt-4", "modelName": "gpt-4", "version": "0613", "capacity": 40},
     {"deployName": "gpt-4-32k", "modelName": "gpt-4-32k", "version": "0613", "capacity": 80}
+  ],
+  "EastUS": [
+    {"deployName": "gpt-35-turbo", "modelName": "gpt-35-turbo", "version": "0613", "capacity": 240},
+    {"deployName": "gpt-35-turbo-16k", "modelName": "gpt-35-turbo-16k", "version": "0613", "capacity": 240}
+  ],
+  "EastUS2": [
+    {"deployName": "gpt-35-turbo", "modelName": "gpt-35-turbo", "version": "0613", "capacity": 240},
+    {"deployName": "gpt-35-turbo-16k", "modelName": "gpt-35-turbo-16k", "version": "0613", "capacity": 240},
+    {"deployName": "gpt-4", "modelName": "gpt-4", "version": "1106-Preview", "capacity": 80}
+  ],
+  "FranceCentral": [
+    {"deployName": "gpt-35-turbo", "modelName": "gpt-35-turbo", "version": "0613", "capacity": 240},
+    {"deployName": "gpt-35-turbo-16k", "modelName": "gpt-35-turbo-16k", "version": "0613", "capacity": 240},
+    {"deployName": "gpt-4-32k", "modelName": "gpt-4-32k", "version": "0613", "capacity": 60},
+    {"deployName": "gpt-4", "modelName": "gpt-4", "version": "1106-Preview", "capacity": 80}
+  ],
+  "JapanEast": [
+    {"deployName": "gpt-35-turbo", "modelName": "gpt-35-turbo", "version": "0613", "capacity": 240},
+    {"deployName": "gpt-35-turbo-16k", "modelName": "gpt-35-turbo-16k", "version": "0613", "capacity": 240}
+  ],
+  "NorthCentralUS": [
+    {"deployName": "gpt-35-turbo", "modelName": "gpt-35-turbo", "version": "0613", "capacity": 240},
+    {"deployName": "gpt-35-turbo-16k", "modelName": "gpt-35-turbo-16k", "version": "0613", "capacity": 240}
+  ],
+  "SwedenCentral": [
+    {"deployName": "gpt-35-turbo", "modelName": "gpt-35-turbo", "version": "0613", "capacity": 240},
+    {"deployName": "gpt-35-turbo-16k", "modelName": "gpt-35-turbo-16k", "version": "0613", "capacity": 240},
+    {"deployName": "gpt-4", "modelName": "gpt-4", "version": "0613", "capacity": 40},
+    {"deployName": "gpt-4-32k", "modelName": "gpt-4-32k", "version": "0613", "capacity": 80},
+    {"deployName": "gpt-4v", "modelName": "gpt-4", "version": "vision-preview", "capacity": 10},
+    {"deployName": "dall-e-3", "modelName": "dall-e-3", "version": "3.0", "capacity": 2}
   ],
   "SwitzerlandNorth": [
     {"deployName": "gpt-35-turbo", "modelName": "gpt-35-turbo", "version": "0613", "capacity": 240},
-    {"deployName": "gpt-4", "modelName": "gpt-4", "version": "0613", "capacity": 40},
-    {"deployName": "gpt-4-32k", "modelName": "gpt-4-32k", "version": "0613", "capacity": 80}
-  ],
-    "SwedenCentral": [
-    {"deployName": "gpt-35-turbo", "modelName": "gpt-35-turbo", "version": "0613", "capacity": 240},
+    {"deployName": "gpt-35-turbo-16k", "modelName": "gpt-35-turbo-16k", "version": "0613", "capacity": 240},
     {"deployName": "gpt-4", "modelName": "gpt-4", "version": "0613", "capacity": 40},
     {"deployName": "gpt-4-32k", "modelName": "gpt-4-32k", "version": "0613", "capacity": 80},
-    {"deployName": "dall-e-3", "modelName": "dall-e-3", "version": "3.0", "capacity": 2}
+    {"deployName": "gpt-4v", "modelName": "gpt-4", "version": "vision-preview", "capacity": 10}
   ],
-   "FranceCentral": [
+  "UKSouth": [
     {"deployName": "gpt-35-turbo", "modelName": "gpt-35-turbo", "version": "0613", "capacity": 240},
-    {"deployName": "gpt-4", "modelName": "gpt-4", "version": "0613", "capacity": 20},
-    {"deployName": "gpt-4-32k", "modelName": "gpt-4-32k", "version": "0613", "capacity": 60}
+    {"deployName": "gpt-35-turbo-16k", "modelName": "gpt-35-turbo-16k", "version": "0613", "capacity": 240},
+    {"deployName": "gpt-4", "modelName": "gpt-4", "version": "1106-Preview", "capacity": 80}
+  ],
+  "westeurope": [
+    {"deployName": "gpt-35-turbo", "modelName": "gpt-35-turbo", "version": "0301", "capacity": 240}
+  ],
+  "southIndia": [
+    {"deployName": "gpt-4", "modelName": "gpt-4", "version": "1106-Preview", "capacity": 150},
+    {"deployName": "gpt-35-turbo", "modelName": "gpt-35-turbo", "version": "1106", "capacity": 120}
+  ],
+  "NORWAYEAST": [
+    {"deployName": "gpt-4", "modelName": "gpt-4", "version": "1106-Preview", "capacity": 150}
+  ],
+  "WestUS": [
+    {"deployName": "gpt-35-turbo", "modelName": "gpt-35-turbo", "version": "1106", "capacity": 120},
+    {"deployName": "gpt-4v", "modelName": "gpt-4", "version": "vision-preview", "capacity": 10},
+    {"deployName": "gpt-4", "modelName": "gpt-4", "version": "1106-Preview", "capacity": 80}
   ]
 }
 EOF
@@ -312,10 +327,20 @@ jobs
 export accessToken=$(az account get-access-token --resource https://management.core.windows.net -o json | jq -r .accessToken)
 
 # 2. 部署并关闭内容过滤
-mkdir -p log
 regions=($(echo "$config_json" | jq -r 'keys[]'))
 for region in "${regions[@]}"; do
-  az_region_deployment "$region" "$subnum" "$config_json"  >> "log/${region}.log" 2>&1 &
+  echo "Processing region: $region..."
+  models=($(echo "$config_json" | jq -r ".$region[] | @base64"))
+  for model in "${models[@]}"; do
+    model_json=$(echo "$model" | base64 -d)
+    modelName=$(echo "$model_json" | jq -r '.modelName')
+    version=$(echo "$model_json" | jq -r '.version')
+    capacity=$(echo "$model_json" | jq -r '.capacity')
+    deployName=$(echo "$model_json" | jq -r '.deployName')
+    echo "  region: $region, modelName: $modelName, version: $version, capacity: $capacity, deployName: ${deployName}"
+    # deployment
+    az_deployment_flow "${region}" "${subnum}" "${modelName}" "${version}" "${capacity}" "${deployName}" &
+  done
 done
 
 # 等待并行部署完成
