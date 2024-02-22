@@ -243,7 +243,7 @@ default_config_json=$(cat <<EOF
     {"deployName": "gpt-35-turbo", "modelName": "gpt-35-turbo", "version": "0613", "capacity": 240},
     {"deployName": "gpt-4", "modelName": "gpt-4", "version": "1106-Preview", "capacity": 80}
   ],
-   "EastUS2": [
+  "EastUS2": [
     {"deployName": "gpt-35-turbo", "modelName": "gpt-35-turbo", "version": "0613", "capacity": 240},
     {"deployName": "gpt-35-turbo-16k", "modelName": "gpt-35-turbo-16k", "version": "0613", "capacity": 240},
     {"deployName": "gpt-4", "modelName": "gpt-4", "version": "1106-Preview", "capacity": 80}
