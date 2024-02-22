@@ -208,19 +208,13 @@ default_config_json=$(cat <<EOF
 {
   "AustraliaEast": [
     {"deployName": "gpt-35-turbo", "modelName": "gpt-35-turbo", "version": "0613", "capacity": 240},
-    {"deployName": "gpt-35-turbo-16k", "modelName": "gpt-35-turbo-16k", "version": "0613", "capacity": 240},
     {"deployName": "gpt-4", "modelName": "gpt-4", "version": "0613", "capacity": 40},
     {"deployName": "gpt-4-32k", "modelName": "gpt-4-32k", "version": "0613", "capacity": 80}
   ],
   "CanadaEast": [
     {"deployName": "gpt-35-turbo", "modelName": "gpt-35-turbo", "version": "0613", "capacity": 240},
-    {"deployName": "gpt-35-turbo-16k", "modelName": "gpt-35-turbo-16k", "version": "0613", "capacity": 240},
     {"deployName": "gpt-4", "modelName": "gpt-4", "version": "0613", "capacity": 40},
     {"deployName": "gpt-4-32k", "modelName": "gpt-4-32k", "version": "0613", "capacity": 80}
-  ],
-  "EastUS": [
-    {"deployName": "gpt-35-turbo", "modelName": "gpt-35-turbo", "version": "0613", "capacity": 240},
-    {"deployName": "gpt-35-turbo-16k", "modelName": "gpt-35-turbo-16k", "version": "0613", "capacity": 240}
   ],
   "EastUS2": [
     {"deployName": "gpt-35-turbo", "modelName": "gpt-35-turbo", "version": "0613", "capacity": 240},
@@ -229,13 +223,8 @@ default_config_json=$(cat <<EOF
   ],
   "FranceCentral": [
     {"deployName": "gpt-35-turbo", "modelName": "gpt-35-turbo", "version": "0613", "capacity": 240},
-    {"deployName": "gpt-35-turbo-16k", "modelName": "gpt-35-turbo-16k", "version": "0613", "capacity": 240},
     {"deployName": "gpt-4-32k", "modelName": "gpt-4-32k", "version": "0613", "capacity": 60},
     {"deployName": "gpt-4", "modelName": "gpt-4", "version": "1106-Preview", "capacity": 80}
-  ],
-  "JapanEast": [
-    {"deployName": "gpt-35-turbo", "modelName": "gpt-35-turbo", "version": "0613", "capacity": 240},
-    {"deployName": "gpt-35-turbo-16k", "modelName": "gpt-35-turbo-16k", "version": "0613", "capacity": 240}
   ],
   "NorthCentralUS": [
     {"deployName": "gpt-35-turbo", "modelName": "gpt-35-turbo", "version": "0613", "capacity": 240},
@@ -243,26 +232,18 @@ default_config_json=$(cat <<EOF
   ],
   "SwedenCentral": [
     {"deployName": "gpt-35-turbo", "modelName": "gpt-35-turbo", "version": "0613", "capacity": 240},
-    {"deployName": "gpt-35-turbo-16k", "modelName": "gpt-35-turbo-16k", "version": "0613", "capacity": 240},
     {"deployName": "gpt-4", "modelName": "gpt-4", "version": "0613", "capacity": 40},
     {"deployName": "gpt-4-32k", "modelName": "gpt-4-32k", "version": "0613", "capacity": 80},
-    {"deployName": "gpt-4v", "modelName": "gpt-4", "version": "vision-preview", "capacity": 10},
     {"deployName": "dall-e-3", "modelName": "dall-e-3", "version": "3.0", "capacity": 2}
   ],
   "SwitzerlandNorth": [
     {"deployName": "gpt-35-turbo", "modelName": "gpt-35-turbo", "version": "0613", "capacity": 240},
-    {"deployName": "gpt-35-turbo-16k", "modelName": "gpt-35-turbo-16k", "version": "0613", "capacity": 240},
     {"deployName": "gpt-4", "modelName": "gpt-4", "version": "0613", "capacity": 40},
     {"deployName": "gpt-4-32k", "modelName": "gpt-4-32k", "version": "0613", "capacity": 80},
-    {"deployName": "gpt-4v", "modelName": "gpt-4", "version": "vision-preview", "capacity": 10}
   ],
   "UKSouth": [
     {"deployName": "gpt-35-turbo", "modelName": "gpt-35-turbo", "version": "0613", "capacity": 240},
-    {"deployName": "gpt-35-turbo-16k", "modelName": "gpt-35-turbo-16k", "version": "0613", "capacity": 240},
     {"deployName": "gpt-4", "modelName": "gpt-4", "version": "1106-Preview", "capacity": 80}
-  ],
-  "westeurope": [
-    {"deployName": "gpt-35-turbo", "modelName": "gpt-35-turbo", "version": "0301", "capacity": 240}
   ],
   "southIndia": [
     {"deployName": "gpt-4", "modelName": "gpt-4", "version": "1106-Preview", "capacity": 150},
@@ -273,7 +254,6 @@ default_config_json=$(cat <<EOF
   ],
   "WestUS": [
     {"deployName": "gpt-35-turbo", "modelName": "gpt-35-turbo", "version": "1106", "capacity": 120},
-    {"deployName": "gpt-4v", "modelName": "gpt-4", "version": "vision-preview", "capacity": 10},
     {"deployName": "gpt-4", "modelName": "gpt-4", "version": "1106-Preview", "capacity": 80}
   ]
 }
