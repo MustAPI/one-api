@@ -211,7 +211,7 @@ default_config_json=$(cat <<EOF
     {"deployName": "gpt-4-1106-preview", "modelName": "gpt-4", "version": "1106-Preview", "capacity": 80},
     {"deployName": "gpt-4", "modelName": "gpt-4", "version": "0613", "capacity": 40},
     {"deployName": "gpt-4-32k", "modelName": "gpt-4-32k", "version": "0613", "capacity": 80},
-    {"deployName": "gpt-4v", "modelName": "gpt-4", "version": "vision-preview", "capacity": 30}
+    {"deployName": "gpt-4-vision-preview", "modelName": "gpt-4", "version": "vision-preview", "capacity": 30}
   ],
   "CanadaEast": [
     {"deployName": "gpt-35-turbo", "modelName": "gpt-35-turbo", "version": "0613", "capacity": 240},
@@ -230,7 +230,7 @@ default_config_json=$(cat <<EOF
     {"deployName": "gpt-4", "modelName": "gpt-4", "version": "0613", "capacity": 40},
     {"deployName": "gpt-4-1106-preview", "modelName": "gpt-4", "version": "1106-Preview", "capacity": 150},
     {"deployName": "gpt-4-32k", "modelName": "gpt-4-32k", "version": "0613", "capacity": 80},
-    {"deployName": "gpt-4v", "modelName": "gpt-4", "version": "vision-preview", "capacity": 30},
+    {"deployName": "gpt-4-vision-preview", "modelName": "gpt-4", "version": "vision-preview", "capacity": 30},
     {"deployName": "dall-e-3", "modelName": "dall-e-3", "version": "3.0", "capacity": 2}
   ],
    "FranceCentral": [
@@ -248,7 +248,7 @@ default_config_json=$(cat <<EOF
    "WestUS": [
     {"deployName": "gpt-35-turbo", "modelName": "gpt-35-turbo", "version": "1106", "capacity": 120},
     {"deployName": "gpt-4-1106-preview", "modelName": "gpt-4", "version": "1106-Preview", "capacity": 80},
-    {"deployName": "gpt-4v", "modelName": "gpt-4", "version": "vision-preview", "capacity": 30}
+    {"deployName": "gpt-4-vision-preview", "modelName": "gpt-4", "version": "vision-preview", "capacity": 30}
   ],
     "UKSouth": [
     {"deployName": "gpt-35-turbo", "modelName": "gpt-35-turbo", "version": "0613", "capacity": 240},
