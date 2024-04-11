@@ -247,7 +247,15 @@ default_config_json=$(cat <<EOF
   ],
   "NorthCentralUS": [
     {"deployName": "gpt-35-turbo", "modelName": "gpt-35-turbo", "version": "0613", "capacity": 240},
-    {"deployName": "gpt-4-0125-preview", "modelName": "gpt-4", "version": "0125-Preview", "capacity": 80}
+    {"deployName": "gpt-4-1106-preview", "modelName": "gpt-4", "version": "0125-Preview", "capacity": 80}
+  ],
+   "EastUS": [
+    {"deployName": "gpt-35-turbo", "modelName": "gpt-35-turbo", "version": "0613", "capacity": 240},
+    {"deployName": "gpt-4-1106-preview", "modelName": "gpt-4", "version": "0125-Preview", "capacity": 80}
+  ],
+  "SouthCentralUS": [
+    {"deployName": "gpt-35-turbo", "modelName": "gpt-35-turbo", "version": "0125", "capacity": 240},
+    {"deployName": "gpt-4-1106-preview", "modelName": "gpt-4", "version": "0125-Preview", "capacity": 80}
   ],
    "WestUS": [
     {"deployName": "gpt-35-turbo", "modelName": "gpt-35-turbo", "version": "1106", "capacity": 120},
