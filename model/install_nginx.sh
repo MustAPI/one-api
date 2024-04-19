@@ -37,9 +37,9 @@ CONF_NGINX=/etc/nginx/nginx.conf
  echo "        proxy_ssl_server_name on;" >> ${CONF_NGINX}
  echo "        proxy_buffering off;" >> ${CONF_NGINX}
  echo "                autoindex_localtime on;" >> ${CONF_NGINX}
- echo "                proxy_connect_timeout 600s;" >> ${CONF_NGINX}
- echo "                proxy_read_timeout 600s;" >> ${CONF_NGINX}
- echo "                proxy_send_timeout 600s;" >> ${CONF_NGINX}
+ echo "                proxy_connect_timeout 2000s;" >> ${CONF_NGINX}
+ echo "                proxy_read_timeout 2000s;" >> ${CONF_NGINX}
+ echo "                proxy_send_timeout 2000s;" >> ${CONF_NGINX}
  echo "        }" >> ${CONF_NGINX}
  echo "        error_page 500 502 503 504 /50x.html;" >> ${CONF_NGINX}
  echo "        location = /50x.html {" >> ${CONF_NGINX}
