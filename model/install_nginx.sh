@@ -13,7 +13,7 @@ CONF_NGINX=/etc/nginx/nginx.conf
  echo "error_log /var/log/nginx/error.log;" >> ${CONF_NGINX}
  echo "pid /run/nginx.pid;" >> ${CONF_NGINX}
  echo "include /usr/share/nginx/modules/*.conf;" >> ${CONF_NGINX}
- echo "events {worker_connections 1024;}" >> ${CONF_NGINX}
+ echo "events {worker_connections 2048;}" >> ${CONF_NGINX}
  echo "http {" >> ${CONF_NGINX}
  echo "   log_format  main  '\$remote_addr - \$remote_user [\$time_local] \"\$request\" '" >> ${CONF_NGINX}
  echo "                      '\$status \$body_bytes_sent \"\$http_referer\" '" >> ${CONF_NGINX}
