@@ -307,6 +307,7 @@ echo "All ${subscriptionId} deployment jobs done"
 jobs
 
 # 3. 导出账号
+mkdir -p data
 az_export_accounts "${subscriptionId}" "${subnum}"
 #az_export_accounts_v2 "${subscriptionId}" "${subnum}"
 
