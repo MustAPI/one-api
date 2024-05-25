@@ -235,8 +235,79 @@ function az_region_deployment() {
 
 default_config_json=$(cat <<EOF
 {
+  "AustraliaEast": [
+    {"deployName": "gpt-35-turbo", "modelName": "gpt-35-turbo", "version": "0613", "capacity": 300},
+    {"deployName": "gpt-4-1106-preview", "modelName": "gpt-4", "version": "1106-Preview", "capacity": 8},
+    {"deployName": "gpt-4", "modelName": "gpt-4", "version": "0613", "capacity": 8},
+    {"deployName": "gpt-4-32k", "modelName": "gpt-4-32k", "version": "0613", "capacity": 8},
+    {"deployName": "gpt-4-vision-preview", "modelName": "gpt-4", "version": "vision-preview", "capacity": 8}
+  ],
+  "CanadaEast": [
+    {"deployName": "gpt-35-turbo", "modelName": "gpt-35-turbo", "version": "0613", "capacity": 300},
+    {"deployName": "gpt-4-1106-preview", "modelName": "gpt-4", "version": "1106-Preview", "capacity": 8},
+    {"deployName": "gpt-4", "modelName": "gpt-4", "version": "0613", "capacity": 8},
+    {"deployName": "gpt-4-32k", "modelName": "gpt-4-32k", "version": "0613", "capacity": 8}
+  ],
+  "SwitzerlandNorth": [
+    {"deployName": "gpt-35-turbo", "modelName": "gpt-35-turbo", "version": "0613", "capacity": 300},
+    {"deployName": "gpt-4-1106-preview", "modelName": "gpt-4", "version": "1106-Preview", "capacity": 8},
+    {"deployName": "gpt-4", "modelName": "gpt-4", "version": "0613", "capacity": 8},
+    {"deployName": "gpt-4-32k", "modelName": "gpt-4-32k", "version": "0613", "capacity": 8},
+    {"deployName": "gpt-4-vision-preview", "modelName": "gpt-4", "version": "vision-preview", "capacity": 8}
+  ],
+  "SwedenCentral": [
+    {"deployName": "gpt-35-turbo", "modelName": "gpt-35-turbo", "version": "0613", "capacity": 300},
+    {"deployName": "gpt-4", "modelName": "gpt-4", "version": "0613", "capacity": 8},
+    {"deployName": "gpt-4-turbo-2024-04-09", "modelName": "gpt-4", "version": "turbo-2024-04-09", "capacity": 8},
+    {"deployName": "gpt-4-32k", "modelName": "gpt-4-32k", "version": "0613", "capacity": 8},
+    {"deployName": "gpt-4-vision-preview", "modelName": "gpt-4", "version": "vision-preview", "capacity": 8}
+  ],
+   "FranceCentral": [
+    {"deployName": "gpt-35-turbo", "modelName": "gpt-35-turbo", "version": "0613", "capacity": 240},
+    {"deployName": "gpt-4", "modelName": "gpt-4", "version": "0613", "capacity": 8},
+    {"deployName": "gpt-4-1106-preview", "modelName": "gpt-4", "version": "1106-Preview", "capacity": 8},
+    {"deployName": "gpt-4-32k", "modelName": "gpt-4-32k", "version": "0613", "capacity": 8}
+  ],
+  "southIndia": [
+    {"deployName": "gpt-35-turbo", "modelName": "gpt-35-turbo", "version": "1106", "capacity": 120},
+    {"deployName": "gpt-4-1106-preview", "modelName": "gpt-4", "version": "1106-Preview", "capacity": 8}
+  ],
+  "NORWAYEAST": [
+    {"deployName": "gpt-4-1106-preview", "modelName": "gpt-4", "version": "1106-Preview", "capacity": 8}
+  ],
+  "NorthCentralUS": [
+    {"deployName": "gpt-35-turbo", "modelName": "gpt-35-turbo", "version": "0613", "capacity": 300},
+    {"deployName": "gpt-4-1106-preview", "modelName": "gpt-4", "version": "0125-Preview", "capacity": 8}},
+    {"deployName": "gpt-4o-2024-05-13", "modelName": "gpt-4o", "version": "2024-05-13", "capacity": 8}
+  ],
    "EastUS": [
-    {"deployName": "gpt-4-1106-preview", "modelName": "gpt-4", "version": "0125-Preview", "capacity": 8}
+    {"deployName": "gpt-35-turbo", "modelName": "gpt-35-turbo", "version": "0613", "capacity": 240},
+    {"deployName": "gpt-4-1106-preview", "modelName": "gpt-4", "version": "0125-Preview", "capacity": 8},
+    {"deployName": "gpt-4o-2024-05-13", "modelName": "gpt-4o", "version": "2024-05-13", "capacity": 8}
+  ],
+  "SouthCentralUS": [
+    {"deployName": "gpt-35-turbo", "modelName": "gpt-35-turbo", "version": "0125", "capacity": 240},
+    {"deployName": "gpt-4-1106-preview", "modelName": "gpt-4", "version": "0125-Preview", "capacity": 8}},
+    {"deployName": "gpt-4o-2024-05-13", "modelName": "gpt-4o", "version": "2024-05-13", "capacity": 8}
+  ],
+   "WestUS": [
+    {"deployName": "gpt-35-turbo", "modelName": "gpt-35-turbo", "version": "1106", "capacity": 300},
+    {"deployName": "gpt-4-1106-preview", "modelName": "gpt-4", "version": "1106-Preview", "capacity": 8},
+    {"deployName": "gpt-4-vision-preview", "modelName": "gpt-4", "version": "vision-preview", "capacity": 8},
+    {"deployName": "gpt-4o-2024-05-13", "modelName": "gpt-4o", "version": "2024-05-13", "capacity": 8}
+  ],
+  "WestUS3": [
+    {"deployName": "gpt-4-1106-preview", "modelName": "gpt-4", "version": "1106-Preview", "capacity": 8},
+    {"deployName": "gpt-4o-2024-05-13", "modelName": "gpt-4o", "version": "2024-05-13", "capacity": 8}
+  ],
+    "UKSouth": [
+    {"deployName": "gpt-35-turbo", "modelName": "gpt-35-turbo", "version": "0613", "capacity": 240},
+    {"deployName": "gpt-4-1106-preview", "modelName": "gpt-4", "version": "1106-Preview", "capacity": 8}
+  ],
+   "EastUS2": [
+    {"deployName": "gpt-35-turbo", "modelName": "gpt-35-turbo", "version": "0613", "capacity": 300},
+    {"deployName": "gpt-4-turbo-2024-04-09", "modelName": "gpt-4", "version": "turbo-2024-04-09", "capacity": 8},
+    {"deployName": "gpt-4o-2024-05-13", "modelName": "gpt-4o", "version": "2024-05-13", "capacity": 8}
   ]
 }
 EOF
