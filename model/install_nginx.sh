@@ -1,4 +1,4 @@
- #安装nginx
+#安装nginx
  yum install nginx -y
 
 
@@ -19,6 +19,7 @@ CONF_NGINX=/etc/nginx/nginx.conf
  echo "                      '\$status \$body_bytes_sent \"\$http_referer\" '" >> ${CONF_NGINX}
  echo "                      '\"\$http_user_agent\" \"\$http_x_forwarded_for\"';" >> ${CONF_NGINX}
  echo "   access_log  /var/log/nginx/access.log  main;" >> ${CONF_NGINX}
+ echo "   resolver 	      8.8.8.8;" >> ${CONF_NGINX}
  echo "   sendfile            on;" >> ${CONF_NGINX}
  echo "   tcp_nopush          on;" >> ${CONF_NGINX}
  echo "   tcp_nodelay         on;" >> ${CONF_NGINX}
