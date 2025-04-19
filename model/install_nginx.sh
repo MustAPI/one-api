@@ -1,6 +1,5 @@
-#安装nginx
- yum install nginx -y
-
+ #安装nginx
+ yum install wget vim epel-release  -y
 
  #直接生成nginx配置
 CONF_NGINX=/etc/nginx/nginx.conf
